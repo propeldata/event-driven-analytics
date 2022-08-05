@@ -4,7 +4,7 @@ You've heard of [event-driven architecture (EDA)][eda]. How about event-driven
 analytics? This project will show you
 
 1. How to pipe events from your [Amazon EventBridge][eventbridge]-backed EDA
-   into your [Snowflake][snowflake] data warehouse, and then
+   into your [Snowflake][snowflake] data warehouse.
 2. How to build metrics on top of your events, suitable for inclusion in product
    dashboards using [Propel][propel].
 
