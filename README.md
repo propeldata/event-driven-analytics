@@ -11,6 +11,14 @@ analytics? This project will show you
 We'll accomplish all of this following an [infrastructure as code (IaC)][iac]
 approach with [Terraform][terraform].
 
+```mermaid
+graph TB
+    A(Your Application) -->|Events| B(Amazon EventBridge)
+    B -->|Events| C(Snowflake Data Warehouse)
+    C -->|Events| D(Propel Data Cloud)
+    D -->|Metrics| A
+```
+
 ## What you will need…
 
 - **The latest version of Terraform.** See [here][download-terraform] for
