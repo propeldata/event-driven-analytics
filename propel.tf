@@ -22,18 +22,12 @@ resource "propel_data_pool" "all_events" {
   timestamp = "TIME"
 }
 
-resource "propel_metric" "all_events_metric" {
+resource "propel_metric" "all_events" {
   unique_name = "all_events"
   description = "Metric for all events"
   data_pool   = propel_data_pool.all_events.id
 
   type = "COUNT"
 
-  dimensions = [
-    "VERSION",
-    "DETAIL_TYPE",
-    "SOURCE",
-    "ACCOUNT",
-    "REGION",
-  ]
+  dimensions = ["VERSION", "DETAIL_TYPE", "SOURCE", "ACCOUNT", "REGION"]
 }
