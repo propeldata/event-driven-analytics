@@ -60,6 +60,22 @@ terraform plan
 terraform apply
 ```
 
+## Testing it…
+
+If you've already got events flowing through EventBridge, you may see events
+immediately. Otherwise, you can use the AWS CLI to publish events yourself:
+
+```
+aws events put-events --entries '[{"Source":"my-source","DetailType":"my-detail-type","Detail":"{\"foo\":\"bar\"}"}]'
+```
+
+Publish a few of these events, wait a few minutes, and navigate to your Metric
+in the Propel Console. Using the Metrics Playground, pull up the leaderboard
+visualization, and choose the "SOURCE" Dimension to group by. You should now see
+a leaderboard of your most common events by "SOURCE".
+
+![Leaderboard in Propel's Metric Playground](./leaderboard.png)
+
 [eda]: https://en.wikipedia.org/wiki/Event-driven_architecture
 [eventbridge]: https://aws.amazon.com/eventbridge/
 [snowflake]: https://www.snowflake.com/
