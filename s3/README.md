@@ -36,16 +36,16 @@ graph TB
 ## Variables
 
 Once you've completed the pre-requisites above, you'll need to specify Terraform
-variables. The easiest way is to copy the `.auto.tfvars.example` file in this
-repository and rename it to [`.auto.tfvars`][tfvars-example]. Because
-`.auto.tfvars` will contain credentials, it must never be checked into your
-repository. In order to prevent this, `.auto.tfvars` has been included in the
+variables. The easiest way is to copy the [`.auto.tfvars.example`][tfvars-example]
+file in this repository and rename it to `.auto.tfvars`. Because `.auto.tfvars`
+will contain credentials, it must never be checked into your repository. In
+order to prevent this, `.auto.tfvars` has been included in the
 [`.gitignore`][gitignore] file.
 
 ## Deploying the code…
 
 Once you've setup your variables, run the following `terraform` commands from
-the root of the project:
+the `s3/` folder of this project:
 
 ```
 terraform init
