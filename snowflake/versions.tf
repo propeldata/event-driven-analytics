@@ -8,7 +8,7 @@ terraform {
     }
     propel = {
       source  = "propeldata/propel"
-      version = "0.0.1"
+      version = "~> 0.1.0"
     }
     random = {
       source  = "hashicorp/random"
