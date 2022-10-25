@@ -1,8 +1,9 @@
 resource "propel_data_source" "all_events" {
   unique_name = "all_events"
   description = "Data Source for all events"
+  type        = "Snowflake"
 
-  connection_settings {
+  snowflake_connection_settings {
     account   = "${var.snowflake_account}.${var.snowflake_region}"
     database  = var.snowflake_database
     warehouse = var.snowflake_warehouse
