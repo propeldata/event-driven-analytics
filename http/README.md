@@ -1,4 +1,4 @@
-# S3 × Propel
+# HTTP × Propel
 
 You've heard of [event-driven architecture (EDA)][eda]. How about event-driven
 analytics? This project will show you
