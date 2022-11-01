@@ -1,0 +1,84 @@
+# S3 × Propel
+
+You've heard of [event-driven architecture (EDA)][eda]. How about event-driven
+analytics? This project will show you
+
+1. How to pipe events from your [Amazon EventBridge][eventbridge]-backed EDA
+   into [Propel][propel].
+2. How to build metrics on top of your events, suitable for inclusion in product
+   dashboards.
+
+We'll accomplish all of this following an [infrastructure as code (IaC)][iac]
+approach with [Terraform][terraform] and [Propel's Terraform provider][provider].
+
+```mermaid
+graph TB
+    A(Your Application) -->|Events| B(Amazon EventBridge)
+    B -->|Events| C(Propel Data Cloud)
+    C -->|Metrics| A
+```
+
+## What you will need…
+
+- **The latest version of Terraform.** See [here][download-terraform] for
+  instructions on how to download and setup Terraform.
+- **An Amazon Web Services (AWS) Account, an IAM user, and the IAM user's AWS
+  access key and secret access key.** If you don't already have an account, you
+  can signup for free [here][signup-aws]. Then, follow [this guide][access-key]
+  to create an IAM user, access key, and secret access key.
+- **A Propel account, with an admin Application, client ID, and client secret.**
+  If you don't already have an account, you can join the waitlist
+  [here][signup-propel]. Once you have an account, follow
+  [this guide][application-guide] to setup your admin Application and get access
+  to your client ID and client secret.
+
+## Variables
+
+Once you've completed the pre-requisites above, you'll need to specify Terraform
+variables. The easiest way is to copy the [`.auto.tfvars.example`][tfvars-example]
+file in this repository and rename it to `.auto.tfvars`. Because `.auto.tfvars`
+will contain credentials, it must never be checked into your repository. In
+order to prevent this, `.auto.tfvars` has been included in the
+[`.gitignore`][gitignore] file.
+
+## Deploying the code…
+
+Once you've setup your variables, run the following `terraform` commands from
+the `http/` folder of this project:
+
+```
+terraform init
+terraform plan
+terraform apply
+```
+
+## Testing it…
+
+If you've already got events flowing through EventBridge, you may see events
+immediately. Otherwise, you can use the AWS CLI to publish events yourself:
+
+```
+aws events put-events --entries '[{"Source":"my-source","DetailType":"my-detail-type","Detail":"{\"foo\":\"bar\"}"}]'
+```
+
+Publish a few of these events, wait a few minutes, and navigate to your Metric
+in the Propel Console. Using the Metrics Playground, pull up the leaderboard
+visualization, and choose the "SOURCE" Dimension to group by. You should now see
+a leaderboard of your most common events by "SOURCE".
+
+![Leaderboard in Propel's Metric Playground](../images/leaderboard.png)
+
+[eda]: https://en.wikipedia.org/wiki/Event-driven_architecture
+[eventbridge]: https://aws.amazon.com/eventbridge/
+[propel]: https://www.propeldata.com/
+[iac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
+[terraform]: https://www.terraform.io/
+[provider]: https://registry.terraform.io/providers/propeldata/propel/latest/docs
+[dbt]: https://www.getdbt.com/
+[download-terraform]: https://www.terraform.io/downloads
+[signup-aws]: https://portal.aws.amazon.com/billing/signup
+[access-key]: https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/
+[signup-propel]: https://www.propeldata.com/
+[application-guide]: #
+[tfvars-example]: .auto.tfvars.example
+[gitignore]: ../.gitignore
