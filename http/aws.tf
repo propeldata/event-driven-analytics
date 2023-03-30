@@ -40,9 +40,7 @@ resource "aws_kinesis_firehose_delivery_stream" "all_events" {
   }
 
   http_endpoint_configuration {
-    # TODO(mroberts): We need to figure out how to get the table ID so that we
-    #   can construct this URL dynamically. It should not be hardcoded.
-    url            = "https://upload.us-east-2.propeldata.com/v1/TBLVR7QHY2PH605XKZ06W2085MGGM/events"
+    url            = "https://upload.us-east-2.propeldata.com/v1/${propel_data_source.all_events.table[0].id}/kinesis"
     name           = "Propel"
     role_arn       = aws_iam_role.all_events.arn
     s3_backup_mode = "FailedDataOnly"
